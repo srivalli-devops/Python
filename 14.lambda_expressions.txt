@@ -1,0 +1,70 @@
+Simple Function using Lambda expressions
+
+display = lambda msg : print(msg)
+display("Hello")
+
+
+
+Double the Number:
+double = lambda x : x*x
+
+no = int(input("Enter number : "))
+print("Double : ",double(no))
+
+
+
+
+Even or Odd:
+isEven = lambda x : x%2==0
+
+isEven = lambda n : n%2==0
+
+n = int(input("Enter one number : "))
+res = isEven(n)
+if(res==True):
+    print("Even number")
+else:
+    print("Odd number")
+
+
+
+
+Arithmetic Operations:
+multiply = lambda a,b : a*b
+
+x = int(input("Enter No1 : "))
+y = int(input("Enter No2 : "))
+res = multiply(x,y)
+print("Product of ",x," and ",y," is : ",res)
+
+
+
+
+
+
+biggest = lambda a,b : a if a>b else b
+
+x = int(input("Enter x val : "))
+y = int(input("Enter y val : "))
+res = biggest(x,y)
+print("Biggest one is : ",res)
+
+
+
+
+Biggest of 3 numbers:
+big = lambda a,b,c : a if a>b and a>c  else b if b>c else c
+
+a = int(input("a val : "))
+b = int(input("b val : "))
+c = int(input("c val : "))
+res = big(a,b,c)
+print("Biggest one is : ", res)
+
+
+
+
+
+
+
+

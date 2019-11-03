@@ -1,0 +1,156 @@
+Working with Images in Python
+PIL is the Python Imaging Library which provides the python interpreter with image editing capabilities. It was developed by Fredrik Lundh and several other contributors.
+
+
+
+We’ll be working with the Image Module here which provides a class of the same name and provides a lot of functions to work on our images.To import the Image module, our code should begin with the following line:
+
+from PIL import Image
+
+
+
+
+
+from PIL import Image
+filename = "mickey.png"
+image = Image.open(filename)
+width, height = image.size
+
+
+
+rotate(): used to rotate an image by specifying in degrees
+
+from PIL import Image
+class ImageEdit:
+    def main():
+        try:
+            img = Image.open("mickey.png") 
+            img = img.rotate(180)
+            print("Image rotated")
+            img.save("rotate_mickey.png")
+        except Exception :
+            pass
+
+if __name__ == '__main__':
+    ImageEdit.main()
+    
+
+  save() is object level in Image class and it is used to save the image after edit.
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+crop() : this function is used to cut the image by specifying the area
+
+Image.crop(box) takes a 4-tuple (left, upper, right, lower) pixel coordinate, and returns a rectangular region from the used image.
+
+	img = Image.open("mickey.png")
+        width, height = img.size
+         
+        area = (0, 0, width/2, height/2)
+        img = img.crop(area)
+
+
+
+Resizing an Image: Image.resize(size)- Here size is provided as a 2-tuple width and height.
+	img = img.resize((width/2, height/2))
+
+
+
+from PIL import Image
+def main():
+    try:
+        img = Image.open("mickey.png")
+        width, height = img.size
+         
+        area = (0, 0, width/2, height/2)
+        img = img.crop(area)
+
+        img.save("crop_mickey.png") 
+    except IOError:
+        pass
+ 
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+Resizing an Image: Image.resize(size)- Here size is provided as a 2-tuple width and height.
+
+img = img.resize((width/2, height/2))
+
+
+
+
+
+
+from PIL import Image
+ 
+def main():
+    try:
+        img = Image.open("picture.jpg")
+        width, height = img.size
+  
+        img = img.resize((width/2, height/2))
+         
+        img.save("resized_picture.jpg") 
+    except IOError:
+        pass
+ 
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+#Transposing an Image: This feature gives us the mirror image of an image
+from PIL import Image
+ 
+def main():
+    try:
+        img = Image.open("mickey.png") 
+        transposed_img = img.transpose(Image.FLIP_LEFT_RIGHT)
+        transposed_img.save("transposed.png")
+    except IOError:
+        pass
+ 
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

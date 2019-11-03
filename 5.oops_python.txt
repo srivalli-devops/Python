@@ -1,0 +1,477 @@
+
+Class members can be accessed using class name.
+class Test:
+    a=10
+
+# print(a) # error :
+print(Test.a)
+
+
+
+
+
+
+
+class level method m() can be accessed using class name.
+class Test:
+    a=10
+
+    def m():
+        print("a value : ", Test.a)
+        return
+
+Test.m()
+
+
+
+
+
+
+Local variable can be accessed directly with in the method.
+class Test:
+    a=10
+
+    def m():
+        a=20
+        print("local - a : ", a)
+        print("class level - a : ", Test.a)
+        return
+
+Test.m()
+
+
+
+
+
+
+
+
+We can modify the value of a variable from a method:
+class Test:
+    a=10
+    def m1():
+        print("a value : ",Test.a)
+        Test.a = Test.a + 20
+        Test.m2()
+        return
+
+    def m2():
+        print("a value : ",Test.a)
+        return
+
+Test.m1()
+
+
+
+
+
+
+We can define more than one class in the same .py file
+class Test1:
+    a=10
+
+class Test2:
+    def m():
+        print("a value : ",Test1.a)
+        return
+
+Test2.m()
+
+
+
+
+
+
+
+We can define global variables outside to all the classes in python program:
+a=10
+class Test:
+    a=20
+    def m():
+        print(a)
+        print(Test.a)
+        return
+
+Test.m()
+
+
+
+
+We can access global variable inside the function using global keyword.
+a=10
+class Test:
+    a=20
+    def m():
+        global a
+        print(a)
+        a=a+30
+        print(Test.a)
+        return
+
+Test.m()
+print(a)
+print(Test.a)
+
+
+
+
+
+
+Parameter(local variable) and class level variable can have the same name:
+class Test:
+    a=10
+    def m(a):
+        print(a)
+        Test.a += a
+        return
+
+Test.m(20)
+print(Test.a)
+
+
+
+
+
+
+
+
+
+
+Global variable and function parameter should not match:
+a=10
+class Test:
+    def m(a):
+        global a # error : parameter name match with global variable 'a'
+        print(a)
+        a=a+30
+        return
+
+Test.m(20)
+print(a)
+
+
+
+
+
+
+
+
+
+Object level members:
+	Object level members are specific to object.
+	These variables get memory allocation everytime when we create object.
+	These members need to access using object address.
+
+
+
+
+How to create object:
+class Test:
+    pass
+
+obj=Test()
+print("Object address : ", obj)
+
+
+
+
+
+
+
+
+
+printing Object address using __hash__() method:
+
+class Test:
+    pass
+
+obj1 = Test()
+obj2 = Test()
+print("Object address : ", obj1.__hash__())
+print("Object address : ", obj2.__hash__())
+
+
+
+
+
+
+
+Object level method:
+	Object level methods must be defined using an argument(self).
+	'self' variable holds the object address.
+	Using 'self', we can access object members from that function.
+
+class Test:
+    def m(self):
+        print("Object level method")
+        return
+
+obj = Test()
+obj.m()
+
+
+  
+
+
+
+Printing object address using 'self' keyword.
+class Test:
+    def fun(self):
+        print("Object address : ", self)
+        return    
+
+obj=Test()
+obj.fun()
+
+
+
+
+
+
+
+
+'self' is optional but recommended.
+class Test:
+    def fun(obj_ref):
+        print("Object address : ", obj_ref)
+        return    
+
+obj=Test()
+obj.fun()
+
+
+
+
+
+Object level variable:
+	Belongs to object
+	Get memory everytime when we create object.
+	Need to initialize using constructor.
+
+
+class Test:
+    def __init__(self, a):
+        self.a = a
+        return
+
+obj = Test(10)
+print("a value : ",obj.a)
+
+
+
+
+
+Object members need to access from object level functions using 'self' keyword.
+class Test:
+    def __init__(self, a):
+        self.a = a
+        return
+
+    def display(self):
+        print("a value : ",self.a)
+        return
+
+obj = Test(10)
+obj.display()
+
+
+
+
+
+
+Class level members : Access using class
+Object level members : Access using object address
+Local members : direct access
+
+class Test:
+    a=10
+    def __init__(self, a):
+        self.a = a
+        return
+
+    def display(self):
+        a=30
+        print("method - a : ",a)
+        print("object - a : ", self.a)
+        print("class - a : ", Test.a)
+        return
+
+obj = Test(20)
+obj.display()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Display address using self keyword and object reference variable:
+class Test:
+    def display(self):
+        print("Address : ",self)
+        return
+
+t1 = Test()
+t2 = Test()
+
+print("t1-address : ", t1)
+t1.display()
+
+print("t2-address : ", t2)
+t2.display()
+
+
+
+
+
+
+
+
+
+
+
+Account operations :
+class Account:
+    def __init__(self,balance):
+        self.balance = balance
+        return
+
+    def withdraw(self, amount):
+        print("Withdrawing.... : ", amount)
+        print("Avail balance : ", self.balance)
+        if amount<=self.balance :
+            self.balance = self.balance - amount
+            print("Collect cash : ",amount)
+        else:
+            print("Low balance error")
+        return
+
+amount = int(input("Enter initial amount : "))
+acc = Account(amount)
+print("balance : ",acc.balance)
+
+
+amount = int(input("Enter amount to withdraw : "))
+acc.withdraw(amount)
+print("Final balance : ", acc.balance)
+             
+
+
+
+
+
+
+
+
+
+class Institute:
+    def __init__(self, course):
+        self.course = course
+        return
+    
+    def whichClass(self):
+        print(self.course," class is going on")
+        return
+
+    def reception():
+        room1 = Institute("C")
+        room2 = Institute("Python")
+        room3 = Institute("Java")
+
+        room2.whichClass()
+        room3.whichClass()
+        return
+
+Institute.reception()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Withdraw operations:
+class Account:
+    def __init__(self, pin , balance):
+        self.pin = pin
+        self.balance = balance
+        return
+
+    def withdraw(self):
+        pin = int(input("Enter PIN : "))
+        if pin==self.pin :
+            amt = int(input("Enter amt to withdraw : "))
+            print("Avail balance : ", self.balance)
+            if amt<=self.balance :
+                self.balance = self.balance - amt
+                print("Collect cash : ",amt)
+            else:
+                print("Low balance error")
+        else:
+            print("Invalid pin")
+
+        print("Final balance : ", self.balance)
+        return
+
+a1 = Account(1234 , 9000)
+a2 = Account(0000 , 12000)
+
+print("Balance of a1 : ", a1.balance)
+print("Balance of a2 : ", a2.balance)
+
+print("Perform withdraw operations : ")
+a1.withdraw()
+a2.withdraw()
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

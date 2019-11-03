@@ -1,0 +1,354 @@
+A regular expression is a sequence of characters used to match or find a string in the given pattern.
+
+The module 're' provides functionality of regular expressions in Python. 
+
+
+The most common uses of regular expressions are:
+
+1. Search a string (search and match)
+2. Finding a string (findall)
+3. Break string into a sub strings (split)
+4. Replace part of a string (sub)
+
+
+
+The ‘re’ package provides multiple methods to perform queries on an input string. Here are the most commonly used methods, I will discuss:
+
+re.match()
+re.search()
+re.findall()
+re.split()
+re.sub()
+re.compile()
+
+
+
+re.match(pattern, string):
+	This method finds match if it occurs at start of the string.
+	re.match(pattern, string, flags=0)
+
+flags : Represent properties or rules to follow while matching the pattern.
+	We can specify different flags using bitwise OR (|)
+
+On success match() function returns match object.
+On failure, it returns None.
+We use group() or groups() function of match object to get matched expression.
+
+
+
+Following program explains the return type of match() function
+import re
+line = "Java plus Python gives Jython"
+#result = re.match( r'Python', line)
+result = re.match( r'Java', line)
+print(result)
+
+
+
+Note: Use “r” at the start of the pattern string, it designates a python raw string.
+
+
+
+
+import re
+line = "Java plus Python gives Jython"
+res = re.match( r'ython', line)
+if res:
+   print("Matched : ", res.group(0))
+else:
+   print("Not matched!")
+
+
+
+
+
+
+Match v/s Search:
+match() checks only at the beginning of the string while search() checks for a match anywhere in the string.
+
+
+Here you can see that, search() method is able to find a pattern from any position of the string but it only returns the first occurrence of the search pattern.
+
+
+import re
+line = "Java plus Python gives Jython"
+res = re.search( r'ython', line)
+if res:
+   print("Found : ", res.group(0))
+else:
+   print("Not Found!")
+
+
+group(num=0) : This method returns entire match
+groups() : This method returns all matching subgroups in a tuple
+
+
+
+
+There are methods like start() and end() to know the start and end position of matching pattern in the string.
+
+import re
+line = "Java plus Python gives Jython"
+res = re.search( r'Python', line)
+print("Start : ", res.start())
+print("End : ", res.end())
+
+
+
+
+
+re.findall (pattern, string):
+It helps to get a list of all matching patterns.  
+It retuns a list object with all the matching patter values.
+
+import re
+line = "Java plus Python gives Jython"
+list = re.findall(r'ython', line)
+print(list)
+
+
+
+
+
+
+re.split(pattern, string, [maxsplit=0]):
+This methods helps to split string by the occurrences of given pattern.
+
+import re
+result = re.split(r'a','Ramayana')
+print(result)
+
+
+import re
+result = re.split(r'a','Ramayana', 2)
+print(result)
+
+
+
+
+
+
+re.sub(pattern, repl, string):
+	It helps to search a pattern and replace with a new sub string. If the pattern is not found, string is returned unchanged.
+
+
+import re
+line = "Java plus Python gives JavaPython"
+result = re.sub(r'JavaPython','Jython', line)
+print(result)
+
+
+
+
+
+re.compile(pattern, repl, string):
+	We can combine a regular expression pattern into pattern objects, which can be used for pattern matching. It also helps to search a pattern again without rewriting it.
+
+
+
+import re
+pattern = re.compile("Java")
+
+s1 = "Java plus Python gives Jython"
+r1 = pattern.findall(s1)
+print(r1)
+
+s2 = "Java plus Python gives JavaPython"
+r2 = pattern.findall(s2)
+print(r2)
+
+
+
+
+
+Note:
+Regular expressions can specify patterns, not just fixed characters. 
+Here are the most commonly used operators that helps to generate an expression to represent required characters in a string or file. 
+It is commonly used in web scrapping and  text mining to extract required information.
+
+
+
+
+Extract each character :
+
+import re
+result=re.findall(r'.','Python and R')
+print(result)
+
+
+
+Above, space is also extracted, now to avoid it use '\w' instead of '.'.
+
+import re
+result=re.findall(r'\w','Python and R')
+print(result)
+
+
+
+
+Extract each word (using '*' or '+')
+'*' extract space as a word
+'+' removes space in extraction
+
+import re
+# result=re.findall(r'\w*','Python and R')
+result=re.findall(r'\w+','Python and R')
+print(result)
+
+
+
+
+
+
+Extract first and last words from the string:
+Using '^' : returns first word
+Using '$' : returns last word
+
+import re
+# result=re.findall(r'^\w*','Python and R')
+result=re.findall(r'\w+$','Python and R')
+print(result)
+
+
+
+
+
+Extract consecutive two characters of in String excluding spaces 
+Extract first two characters of each word excluding spaces 
+
+
+import re
+# result=re.findall(r'\w\w','Python and RLang')
+result=re.findall(r'\b\w\w','Python and RLang')
+print(result)
+
+
+
+
+Return the domain type of given email-ids:
+Extract all characters after “@”
+
+import re
+result=re.findall(r'@\w+','abc@gmail.com , xyz@yahoo.in')
+print(result)
+
+
+
+Above, you can see that “.com”, “.in” part is not extracted. To add it, we will go with below code.
+
+import re
+result=re.findall(r'@\w+.\w+','abc@gmail.com , xyz@yahoo.in')
+print(result)
+
+
+			or
+
+
+import re
+result=re.findall(r'@\w+.\w*','abc@gmail.com , xyz@yahoo.in')
+print(result)
+
+
+
+
+
+Extract only domain name using “( )”
+
+import re
+result=re.findall(r'@\w+.(\w+)','abc@gmail.com , xyz@yahoo.in')
+print(result)
+
+
+
+
+
+
+
+Return data from the given string :
+	Here we will use “\d” to extract digit.
+
+import re
+result=re.findall(r'\d{2}-\d{2}-\d{4}','abc1234-56 11-12-2001 , zyx43-23-08-1987')
+print(result)
+
+
+
+If you want to extract only year again parenthesis “( )” will help you.
+import re
+result=re.findall(r'\d{2}-\d{2}-(\d{4})','abc1234-56 11-12-2001 , zyx43-23-08-1987')
+print(result)
+
+
+
+Return all words of a string those starts with vowel
+
+import re
+result=re.findall(r'[aeiouAEIOU]\w+','India is My country')
+print(result)
+
+
+
+
+
+
+Above you can see that it has returned “argest” and “ommunity” from the mid of words. To drop these two, we need to use “\b” for word boundary.
+
+import re
+result=re.findall(r'\b[aeiouAEIOU]\w+','India is My country')
+print(result)
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import re
+line = "Cats are smarter than dogs";
+
+matchObj = re.match( r'dogs', line, re.M|re.I)
+if matchObj:
+   print("match --> matchObj.group() : ", matchObj.group())
+else:
+   print("No match!!")
+
+searchObj = re.search( r'dogs', line, re.M|re.I)
+if searchObj:
+   print("search --> searchObj.group() : ", searchObj.group())
+else:
+   print("Nothing found!!")
+
+
+Regular Expression Modifiers: Option Flags
+	Regular expression literals may include an optional modifier to control various aspects of matching. The modifiers are specified as an optional flag. You can provide multiple modifiers using exclusive OR (|), as shown previously and may be represented by one of these -
+
+re.I --> Performs case-insensitive matching.
+re.L -->Interprets words according to the current locale. This interpretation affects the alphabetic group (\w and \W), as well as word boundary behavior(\b and \B).
+re.M -->Makes $ match the end of a line (not just the end of the string) and makes ^ match the start of any line (not just the start of the string).
+re.S-->Makes a period (dot) match any character, including a newline.
+re.U-->Interprets letters according to the Unicode character set. This flag affects the behavior of \w, \W, \b, \B.
+re.X-->Permits "cuter" regular expression syntax. It ignores whitespace (except inside a set [] or when escaped by a backslash) and treats unescaped # as a comment marker.
+
+

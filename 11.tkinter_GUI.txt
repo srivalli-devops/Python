@@ -1,0 +1,637 @@
+			Graphical User Interface
+
+We can implement GUI programming in Python in different ways.
+
+Tkinter : 
+	Tkinter is the standard GUI library for Python. 
+	Python when combined with Tkinter provides a fast and easy way to create GUI applications. 
+	Tkinter provides a powerful object-oriented interface to the Tk GUI toolkit.
+
+wxPython : 
+	This is an open-source Python interface for wxWindows.
+	It is cross platform application development.
+	It was developed using C++.	
+
+
+
+Simple window creation:
+import tkinter
+window = tkinter.Tk()
+# widgets logic is here
+window.mainloop()
+
+
+
+
+The tkinter module need to import
+	import tkinter 
+
+Tk() need to be initialized to get Window with a title bar. It is the root widget and it should be created before all other widgets.
+	root = tkinter.Tk()
+
+
+
+
+
+
+Tk supports 3 pre-defined Layouts.
+1. pack
+2. grid
+3. place
+
+Note : We cannot use all the 3 layout managers pack, grid, and place in the same master window.
+
+
+Pack:
+Pack is the easiest layout to use of the three geometry managers of Tk and Tkinter.
+Pack is recommanded layout for Simple applications. 
+For example simple applications like placing a number of widgets side by side, or on top of each other.
+
+
+
+
+
+
+
+
+
+Label widget: 
+	It is used to display Image or Text.  
+	First parameter is the name of Parent window(root). 
+	So our Label widget is a child of the root widget. 
+	The keyword parameter "text" specifies the text to be shown:
+		w = tkinter.Label(root, text="Hello Tkinter!")
+
+pack() method tells Tk to fit the size according to textt.
+	w.pack()
+
+The window won't appear until we enter the Tkinter event loop:
+root.mainloop()
+
+
+import tkinter
+root = tkinter.Tk()
+label = tkinter.Label(root, text="Hello Everyone!")
+label.pack()
+root.mainloop()
+
+
+
+
+
+
+
+
+
+Image as Label:
+
+import tkinter
+window = tkinter.Tk()
+logo = tkinter.PhotoImage(file="hello.gif")
+label = tkinter.Label(window, image=logo)
+label.pack()
+window.mainloop()
+
+
+
+
+
+Displaying text on image and arrange the label right side to window:
+import tkinter as tk
+
+root = tk.Tk()
+logo = tk.PhotoImage(file="hello.gif")
+
+tip = 'This is hello image'
+label = tk.Label(root, compound = tk.CENTER,
+                     text=tip,
+                     image=logo)
+label.pack(side="right")
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fonts, backgrounds and foregrounds:
+
+import tkinter as tk
+root = tk.Tk()
+
+tk.Label(root,  text="Blue Text with Arial Font",
+		fg = "blue",
+                font = "Arial").pack()
+
+tk.Label(root,  text="Yellow Text in Candara Font",
+                fg = "yellow",
+                bg = "dark green",
+                font = "Candara 14").pack()
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+Layout : Arrangement of compoenents(widgets) on the window.
+ 
+
+fill Option: If you want to make the widgets as wide as the parent widget, you have to use the fill=X option: 
+
+
+code-1:
+import tkinter
+root = tkinter.Tk()
+w = tkinter.Label(root, text="Red Sun", bg="red", fg="white")
+w.pack(fill=tkinter.X)
+
+
+
+
+
+
+
+
+
+
+code-2:
+from Tkinter import *
+root = Tk()
+w = Label(root, text="Red Sun", bg="red", fg="white")
+w.pack(fill=X)
+w = Label(root, text="Green Grass", bg="green", fg="black")
+w.pack(fill=X)
+w = Label(root, text="Blue Sky", bg="blue", fg="white")
+w.pack(fill=X)
+mainloop()
+
+
+
+
+
+Padding: The pack() manager knows four padding options, i.e. internal and external padding and padding in x and y direction: 
+
+from Tkinter import *
+root = Tk()
+w = Label(root, text="Red Sun", bg="red", fg="white")
+w.pack(fill=X,padx=10)
+w = Label(root, text="Green Grass", bg="green", fg="black")
+w.pack(fill=X,padx=10)
+w = Label(root, text="Blue Sky", bg="blue", fg="white")
+w.pack(fill=X,padx=10)
+mainloop()
+
+
+
+
+
+
+
+from Tkinter import *
+root = Tk()
+w = Label(root, text="red", bg="red", fg="white")
+w.pack(padx=5, pady=10, side=LEFT)
+w = Label(root, text="green", bg="green", fg="black")
+w.pack(padx=5, pady=20, side=LEFT)
+w = Label(root, text="blue", bg="blue", fg="white")
+w.pack(padx=5, pady=30, side=LEFT)
+mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Display Msg on Window without Label:
+
+import tkinter as tk
+master = tk.Tk()
+msg = "Message widget is used to display message on window"
+msg = tk.Message(master, text = msg, bg='lightgreen', font=('Candara', 24, 'italic'))
+msg.pack()
+tk.mainloop()
+
+
+
+
+
+
+
+
+
+Displaying text on image and arrange the label right side to window:
+import tkinter as tk
+
+root = tk.Tk()
+logo = tk.PhotoImage(file="hello.gif")
+
+tip = 'This is hello image'
+label = tk.Label(root, compound = tk.CENTER,
+                     text=tip,
+                     image=logo)
+label.pack(side="right")
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fonts, backgrounds and foregrounds:
+
+import tkinter as tk
+root = tk.Tk()
+
+tk.Label(root,  text="Blue Text with Arial Font",
+		fg = "blue",
+                font = "Arial").pack()
+
+tk.Label(root,  text="Yellow Text in Candara Font",
+                fg = "yellow",
+                bg = "dark green",
+                font = "Candara 14").pack()
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+We can set size manually to Master window using geometry() method of Tk class.
+We use geometry() function is used to set the size of Master window.
+We cannot use geometry() function to place the widgets on the window.
+
+
+command: A property is used to access a function from the widget. Using command attribute only we can set functionality to widgets like Buttons, Radio Buttons.....
+
+from tkinter import *
+def hello():
+    print("Hello, world!")
+
+win = Tk()
+win.title("Tkinter")
+win.geometry("300x200") # Size 300, 200
+
+btn = Button(win, text="Hello", command=hello)
+btn.pack()
+
+mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+place() method is used to arrange the components on the window.
+Once widget is ready with specific width, height and with other properties, we use place() method to set co-ordinates.
+
+import tkinter as tk
+root = tk.Tk()
+root.geometry("500x300")
+
+label = tk.Label(root, width=50, height=2, bg="light green", text="Say Hello", fg='red')
+label.place(x=50,y=10)
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Set bounds to button : 
+
+import tkinter as tk
+def hello():
+    print("Hello, world!")
+    
+root = tk.Tk()
+root.geometry("500x300")
+
+btn = tk.Button(root, text="Hello", command=hello, width=50, height=2, bg="light blue")
+btn.place(x=60,y=10)
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+Text boxes :
+
+from tkinter import *
+
+master = Tk()
+l1 = Label(master, text="First Name")
+l2 = Label(master, text="Last Name")
+
+l1.grid(row=0,column=0)
+l2.grid(row=1,column=0)
+
+e1 = Entry(master)
+e2 = Entry(master)
+
+e1.grid(row=0, column=1)
+e2.grid(row=1, column=1)
+
+mainloop( )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Grid Layout:
+from tkinter import *
+
+def show():
+   print("First Name:", e1.get())
+   print("Last Name : ", e2.get())
+   
+master = Tk()
+l1 = Label(master, text="First Name")
+l2 = Label(master, text="Last Name")
+
+e1 = Entry(master)
+e2 = Entry(master)
+
+b1 = Button(master, text='Show', command=show)
+b2 = Button(master, text='Quit', command=quit)
+
+l1.grid(row=0,column=0)
+e1.grid(row=0,column=1)
+
+l2.grid(row=1,column=0)
+e2.grid(row=1,column=1)
+
+b1.grid(row=2, column=0)
+b2.grid(row=2, column=1)
+
+mainloop( )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The Variable Classes:
+Classes are BooleanVar, DoubleVar, IntVar, StringVar.
+Variables can be used with most entry widgets to track changes to the entered value. 
+The Checkbutton and Radiobutton widgets require variables to work properly.
+Variables can also be used to validate the contents of an entry widget, and to change the text in label widgets.
+
+To create a Tkinter variable, call the corresponding constructor:
+var = StringVar()
+
+We can use setters to set values to widgets.
+var = StringVar()
+var.set("hello")
+
+
+from tkinter import *
+root = Tk()
+var = StringVar()
+label = Label(root, textvariable=var)
+var.set("Welcome, python")
+label.pack()
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+from tkinter import *
+
+def setValue():
+   name = e.get()
+   msg = "Hello "+name+" , welcome"
+   var.set(msg)
+   print(msg)
+   return
+   
+master = Tk()
+var = StringVar()
+l = Label(master, text="Enter your name : ")
+e = Entry(master)
+b = Button(master, text='Display', command=setValue)
+m = Label(master, textvariable=var)
+
+l.grid(row=0,column=0)
+e.grid(row=0,column=1)
+b.grid(row=0,column=2)
+m.grid(row=1)
+
+
+
+
+
+
+
+from tkinter import *
+
+def add():
+   x = int(e1.get())
+   y = int(e2.get())
+   z = x+y
+   sum.set(str(z))
+   return
+   
+master = Tk()
+sum = StringVar()
+l = Label(master, text="Enter input : ")
+e1 = Entry(master)
+e2 = Entry(master)
+plus = Label(master, text=" + ")
+b = Button(master, text='Add', command=add)
+e3 = Entry(master, textvariable=sum)
+
+l.grid(row=0,column=0)
+e1.grid(row=0,column=1)
+e2.grid(row=0,column=2)
+b.grid(row=0,column=3)
+e3.grid(row=0,column=4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Radio Buttons :
+
+import tkinter as tk
+
+root = tk.Tk()
+
+v = tk.IntVar()
+v.set(0)  # initializing the choice, i.e. Python
+
+languages = [("Python",0),("Perl",1),("Java",2),("C++",3),("C",4)]
+
+def ShowChoice():
+    print(v.get())
+
+for val, language in enumerate(languages):
+    tk.Radiobutton(root,    text=language,
+                            variable=v, 
+                            command=ShowChoice,
+                            value=val).pack(anchor=tk.W)
+
+
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

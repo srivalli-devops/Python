@@ -1,0 +1,417 @@
+show database list:
+>> show databases;
+
+>>create database pydb;
+>>show databases;
+
+>> use pydb
+Database changed.
+
+CREATE TABLE:
+	CREATE TABLE table_name (
+    		column1 datatype,
+    		column2 datatype,
+    		column3 datatype,
+  		 ....
+	);
+
+Ex:
+mysql> create table student(sno int, sname varchar(50), fee float);
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> select *from student;
+Empty set (0.00 sec)	
+
+
+How to delete table: Delete the complete table along with its information.
+	DROP TABLE table_name;
+
+Ex:
+	drop table student;
+
+TRUNCATE TABLE: The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+
+Syntax
+TRUNCATE TABLE table_name;
+
+
+ALTER TABLE:
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+ADD Column:
+	ALTER TABLE table_name ADD column_name datatype;
+
+DROP COLUMN
+	ALTER TABLE table_name DROP COLUMN column_name;
+
+MODIFY COLUMN:
+	ALTER TABLE table_name ALTER COLUMN column_name datatype;
+
+My SQL / Oracle (prior version 10G):
+	ALTER TABLE table_name MODIFY COLUMN column_name datatype;
+
+
+INSERT INTO Syntax : It is possible to write the INSERT INTO statement in two ways.
+
+First way: To insert element into specified column.
+INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+
+Second way: If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query. 
+	INSERT INTO table_name VALUES (value1, value2, value3, ...);
+
+
+
+Ex :
+mysql> insert into student values(101, "ram", 15000);
+mysql> commit;
+
+
+
+
+
+Connect to Database from python:
+
+import mysql.connector
+
+cnx = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='pydb')
+print("Connected to pydb")
+
+cnx.close()
+print("Closed successfully")
+
+
+
+
+
+
+
+DB connection using Class:
+import mysql.connector
+
+class DBConnect:
+    def open():
+        con = ''
+        try:
+            con = mysql.connector.connect(user='root',password='root',host='localhost',database='pydb')
+            print("Connected to pydb")
+        except Exception as e:
+            print("Exception caught : ",e)
+        finally:
+            if con!='':
+                con.close()
+                print("Closed successfully")
+            else:
+                print("Connection not opened, no need to close")
+        return
+
+    def main():
+        DBConnect.open()
+
+if __name__ == "__main__":
+    DBConnect.main()
+
+
+
+
+
+Create and Drop table from Python:
+import mysql.connector
+
+class DBConnect:
+    def open():
+        con = ''
+        try:
+            con = mysql.connector.connect(user='root',password='root',host='localhost',database='pydb')
+            print("Connected to pydb")
+            
+            cur = con.cursor()
+            cur.execute('create table stud(sno int, sname varchar(50))')
+            print("Table created successfully")
+
+            cur.execute('drop table stud')
+            print("Table dropped successfully")
+        except Exception as e:
+            print("Exception caught : ",e)
+        finally:
+            if con!='':
+                con.close()
+                print("Closed successfully")
+            else:
+                print("Connection not opened, no need to close")
+        return
+
+    def main():
+        DBConnect.open()
+
+if __name__ == "__main__":
+    DBConnect.main()
+
+
+
+
+Fetch single record using condition:
+import mysql.connector
+
+class DBConnect:
+    def open():
+        con = ''
+        try:
+            con = mysql.connector.connect(user='root',password='root',host='localhost',database='pydb')
+            print("Connected to pydb")
+            
+            cur = con.cursor()
+            cur.execute('select sno, sname, fee from student where sno=101')
+            row = cur.fetchone()
+            print(row)
+                
+        except Exception as e:
+            print("Exception caught : ",e)
+        finally:
+            if con!='':
+                con.close()
+                print("Closed successfully")
+            else:
+                print("Connection not opened, no need to close")
+        return
+
+    def main():
+        DBConnect.open()
+
+if __name__ == "__main__":
+    DBConnect.main()
+
+
+
+Fetch entire table from mysql:
+
+import mysql.connector
+class DBConnect:
+    def open():
+        con = ''
+        try:
+            con = mysql.connector.connect(user='root',password='root',host='localhost',database='pydb')
+            print("Connected to pydb")
+            
+            cur = con.cursor()
+
+            cur.execute('select sno, sname, fee from student')
+            data = cur.fetchall ()
+
+            for row in data :
+                print(row[0] , row[1], row[2])
+                
+        except Exception as e:
+            print("Exception caught : ",e)
+        finally:
+            if con!='':
+                con.close()
+                print("Closed successfully")
+            else:
+                print("Connection not opened, no need to close")
+        return
+
+    def main():
+        DBConnect.open()
+
+if __name__ == "__main__":
+    DBConnect.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+Transaction management:
+mysql> use student;
+Database changed
+
+mysql> show tables;
+
+mysql> set autocommit = 0 ;
+
+mysql> insert into emp values(104,'darwin');
+
+mysql> select *from emp;
++------+--------+
+| eid  | ename  |
++------+--------+
+|  101 | Ramesh |
+|  102 | Suresh |
+|  103 | Annie  |
+|  104 | darwin |
++------+--------+
+
+mysql> rollback;
+
+mysql> select *from emp;
++------+--------+
+| eid  | ename  |
++------+--------+
+|  101 | Ramesh |
+|  102 | Suresh |
+|  103 | Annie  |
++------+--------+
+
+mysql> insert into emp values(104,'darwin');
+
+mysql> commit;
+
+mysql> rollback;
+
+mysql> select *from emp;
++------+--------+
+| eid  | ename  |
++------+--------+
+|  101 | Ramesh |
+|  102 | Suresh |
+|  103 | Annie  |
+|  104 | darwin |
++------+--------+
+
+
+
+
+
+
+
+
+
+
+
+
+Transactions example:
+
+import mysql.connector
+
+class DBConnect:
+    def open():
+        con = ''
+        try:
+            con = mysql.connector.connect(user='root',password='root',host='localhost',database='pydb')
+            print("Connected to pydb")
+
+            con.autocommit = False
+            print("auto commit to false...")
+            
+            cur = con.cursor()
+
+            # cur.execute("create table employee(eno int, ename varchar(50), esal float)")
+            # print("Employee table created successfully")
+
+            cur.execute("insert into employee values(102,'Ananya',50000)")
+            print("Record inserted successfully")
+
+            con.rollback()
+            print("Roll back successful")
+            
+            cur.execute('select eno, ename, esal from employee where eno=102')
+            row = cur.fetchone()
+            print(row)
+                
+        except Exception as e:
+            print("Exception caught : ",e)
+        finally:
+            if con!='':
+                con.close()
+                print("Closed successfully")
+            else:
+                print("Connection not opened, no need to close")
+        return
+
+    def main():
+        DBConnect.open()
+
+if __name__ == "__main__":
+    DBConnect.main()
+
+
+
+
+
+
+
+
+
+
+
+
+Money transfer example:
+mysql> create table account(accno int, balance int);
+Query OK, 0 rows affected (0.41 sec)
+
+mysql> insert into account values(1001 , 5000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into account values(1002 , 8000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into account values(1003 , 10000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select *from account;
++-------+---------+
+| accno | balance |
++-------+---------+
+|  1001 |    5000 |
+|  1002 |    8000 |
+|  1003 |   10000 |
++-------+---------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import mysql.connector
+class Transaction:
+    con=''
+    def do():
+        try:
+            Transaction.con = mysql.connector.connect(user='root',password='root',host='localhost',database='student')
+            print("Connected to database")
+
+            Transaction.con.autocommit = False
+            print("auto commit to false...")
+            
+            cur = Transaction.con.cursor()
+            
+        except Exception as e:
+            print("Exception : ",e)
+
+        finally :
+            if Transaction.con != '':
+                Transaction.con.close()
+                print("Database released...")
+            else:
+                print("No connection to database")
+                
+class Banking:
+    def main():
+        Transaction.do()
+        return
+    
+if __name__ == "__main__":
+    Banking.main()

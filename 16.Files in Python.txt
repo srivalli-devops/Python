@@ -1,0 +1,457 @@
+				Reading and Writing Files in Python
+
+To work with any file, first we need to get File object.
+Open() function is used to open file.
+
+file_obj = open("name", "mode")
+
+File object contain methods and attributes that can be used to collect information. 
+The name attribute tells you the name of the file that the file object has opened.
+The mode attribute of a file object tells you which mode a file was opened in.  
+
+Note : If file is not present and if we don't specify the location, specified file will be created in Current Working Directory.
+class OpenFile:
+    def writeData(self):
+        try:
+            file = open("Data.txt", "w")
+            print("File opened in write mode")
+        except FileNotFoundError as fnfe:
+            print("Exception : ", fnfe)
+        return
+
+
+obj = OpenFile()
+obj.writeData()
+            
+
+
+
+
+
+read() function can read the entire code at at time into OutputStream:
+class OpenFile:
+    def readData(self):
+        try:
+            file = open("c:/users/admin/desktop/File_.py", "r")
+            print("File opened in Read mode")
+            print(file.read())
+        except FileNotFoundError as fnfe:
+            print("Exception : ", fnfe)
+        finally:
+            file.close()
+            print("File closed....")
+        return
+
+
+obj = OpenFile()
+obj.readData()
+            
+
+
+
+
+
+Count number of lines in a File:
+class OpenFile:
+    def readData(self):
+        count=0
+        try:
+            file = open("c:/users/admin/desktop/File_.py", "r")
+            print("File opened in Read mode")
+            for line in file:
+                print(line, end='')
+                count += 1
+
+            print("Line count : ", count)
+        except FileNotFoundError as fnfe:
+            print("Exception : ", fnfe)
+        finally:
+            file.close()
+            print("File closed....")
+        return
+
+
+obj = OpenFile()
+obj.readData()
+            
+
+
+
+
+
+
+
+
+
+
+
+class FileHandling:
+    def checkPIN(self, pin):
+        found = False
+        try:
+            file=open("c:/users/admin/desktop/pins.txt","r")
+            for line in file:
+                if(int(line) == pin):
+                    found = True
+
+            if not found:
+                print("PIN is not present")
+            else:
+                print("PIN is present")
+            
+        except FileNotFoundError:
+            print("File doesn't exist.....")
+        finally:
+            file.close()
+            print("File closed.....")
+        return
+
+pin = int(input("Enter PIN number"))
+obj = FileHandling()
+obj.checkPIN(pin)
+        
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Reading a Text File in Python
+
+There are actually a number of ways to read a text file in Python, not just one. 
+
+If you need to extract a string that contains all characters in the file, you can use the following method: 
+
+
+file.read() 
+
+The full code to work with this method will look something like this: 
+
+
+file = open(“testfile.text”, “r”) 
+print file.read() 
+
+
+
+
+
+
+
+
+
+
+Reading a Text File in Python
+
+There are actually a number of ways to read a text file in Python, not just one. 
+
+If you need to extract a string that contains all characters in the file, you can use the following method: 
+
+
+file.read() 
+
+The full code to work with this method will look something like this: 
+
+
+file = open(“testfile.text”, “r”) 
+print file.read() 
+
+
+
+
+
+
+
+
+file = open(“testfile.txt”, “r”)
+print file.read(5) 
+
+
+
+
+
+
+
+
+
+
+Each time you run the method, it will return a string of characters that contains a single line of information from the file. 
+
+
+file = open(“testfile.txt”, “r”) 
+print file.readline(): 
+
+This would return the first line of the file, like so: 
+
+
+Hello World 
+
+If we wanted to return only the third line in the file, we would use this: 
+
+
+file = open(“testfile.txt”, “r”) 
+print file.readline(3): 
+
+
+
+
+
+
+
+
+Looping over a file object
+
+When you want to read – or return – all the lines from a file in a more memory efficient, and fast manner, you can use the loop over method. The advantage to using this method is that the related code is both simple and easy to read. 
+
+
+file = open(“testfile.txt”, “r”) 
+for line in file: 
+print line, 
+
+This will return: 
+
+
+Hello World 
+This is our new text file 
+and this is another line. 
+Why? Because we can. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Using the File Write Method
+
+One thing you’ll notice about the file write method is that it only requires a single parameter, which is the string you want to be written. 
+
+This method is used to add information or content to an existing file. To start a new line after you write data to the file, you can add an EOL character.
+
+ 
+file = open(“testfile.txt”, “w”)
+
+file.write(“This is a test”) 
+file.write(“To add more lines.”)
+
+file.close()
+
+Obviously, this will amend our current file to include the two new lines of text. There’s no need to show output.
+
+
+Closing a File
+
+When you’re done working, you can use the fh.close() command to end things. What this does is close the file completely, terminating resources in use, in turn freeing them up for the system to deploy elsewhere. 
+
+It’s important to understand that when you use the fh.close() method, any further attempts to use the file object will fail. 
+
+Notice how we have used this in several of our examples to end interaction with a file? This is good practice.
+
+
+File Handling in the Real World
+
+To help you better understand some of the methods discussed here, we’re going to offer a few examples of them being used in the real world. Feel free to copy the code and try it out for yourself in a Python interpreter (make sure you have any named files created and accessible first).
+
+
+Opening a text file:
+
+ 
+
+fh = open(“hello.txt”, “r”) 
+ 
+
+Reading a text file:  
+
+ 
+
+Fh = open(“hello.txt”, “r”) 
+print fh.read() 
+ 
+
+To read a text file one line at a time: 
+
+ 
+
+fh = open(“hello.text”, “r”) 
+print fh.readline() 
+ 
+
+To read a list of lines in a text file: 
+
+ 
+
+fh = open(“hello.txt”, “r”) 
+print fh.readlines() 
+ 
+
+To write new content or text to a file: 
+
+ 
+
+fh = open(“hello.txt”, “w”) 
+ 
+fh.write(“Put the text you want to add here”) 
+fh.write(“and more lines if need be.”) 
+ 
+fh.close() 
+ 
+
+You can also use this to write multiple lines to a file at once: 
+
+ 
+
+fh = open(“hello.txt”,”w”) 
+lines_of_text = [“One line of text here”, “and another line here”, “and yet another here”, “and so on and so forth”] 
+fh.writelines(lines_of_text) 
+fh.close() 
+ 
+
+To append a file: 
+
+ 
+
+fh = open(“hello.txt”, “a”) 
+fh.write(“We Meet Again World”) 
+fh.close 
+ 
+
+To close a file completely when you are done: 
+
+ 
+
+fh = open(“hello.txt”, “r”) 
+print fh.read() 
+fh.close() 
+ 
+
+With Statement
+
+You can also work with file objects using the with statement. It is designed to provide much cleaner syntax and exceptions handling when you are working with code. That explains why it’s good practice to use the with statement where applicable. 
+
+One bonus of using this method is that any files opened will be closed automatically after you are done. This leaves less to worry about during cleanup. 
+
+To use the with statement to open a file:
+
+ 
+
+with open(“filename”) as file: 
+ 
+
+Now that you understand how to call this statement, let’s take a look at a few examples.
+
+ 
+
+with open(“testfile.txt”) as file:  
+data = file.read() 
+do something with data 
+ 
+
+You can also call upon other methods while using this statement. For instance, you can do something like loop over a file object:
+
+ 
+
+with open(“testfile.txt”) as f: 
+for line in f: 
+print line, 
+ 
+
+You’ll also notice that in the above example we didn’t use the “file.close()” method because the with statement will automatically call that for us upon execution. It really makes things a lot easier, doesn’t it?
+
+ 
+
+Using the With Statement in the Real World
+
+To better understand the with statement, let’s take a look at some real world examples just like we did with the file handling functions.
+
+ 
+
+To write to a file using the with statement:
+
+ 
+
+with open(“hello.txt”, “w”) as f: 
+f.write(“Hello World”) 
+ 
+
+To read a file line by line, output into a list:
+
+ 
+
+with open(“hello.txt”) as f: 
+data = f.readlines() 
+ 
+
+This will take all of the text or content from the “hello.txt” file and store it into a string called “data”.
+
+
+Splitting Lines in a Text File
+
+As a final example, let’s explore a unique function that allows you to split the lines taken from a text file. What this is designed to do, is split the string contained in variable data whenever the interpreter encounters a space character.
+
+But just because we are going to use it to split lines after a space character, doesn’t mean that’s the only way. You can actually split your text using any character you wish - such as a colon, for instance.
+
+The code to do this (also using a with statement) is:
+
+ 
+
+with open(“hello.text”, “r”) as f:
+data = f.readlines()
+ 
+for line in data:
+words = line.split()
+print words
+ 
+
+If you wanted to use a colon instead of a space to split your text, you would simply change line.split() to line.split(“:”).
+
+The output for this will be:
+
+ 
+
+[“hello”, “world”, “how”, “are”, “you”, “today?”]
+[“today”, “is”, “Saturday”]
+
+
+
+

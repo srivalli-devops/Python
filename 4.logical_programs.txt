@@ -1,0 +1,383 @@
+def add(x , y):
+    z = int(x)+int(y)
+    print("Sum : ", z)
+    return
+
+s = input("Enter 2 numbers " )
+a,b = s.split()
+add(a,b)
+
+
+
+
+
+
+
+Program to convert characater to integer:
+def toInt(x):
+    a = ord(x)
+    print("Ascii value of '",x,"' is : ",a)
+    return
+
+x = input("Enter one character : ")
+toInt(x)
+
+
+
+
+
+if True:
+    print("If block....")
+
+
+if False:
+    print("If block....")
+
+
+
+
+
+
+
+
+if True:
+    print("If block....")
+else:
+    print("Else block...")
+
+
+
+
+
+
+
+def isEven(num):
+    if num%2==0:
+        print("Yes even")
+    else:
+        print("No odd")
+    return
+
+n = input("Enter number : ")
+isEven(int(n))
+
+
+
+
+
+
+
+
+
+
+
+
+if int(input("Enter no : "))%2==0:
+    print("Even number")
+else:
+    print("Odd number")
+
+
+
+
+
+if - else - if :
+n = int(input("Enter no : "))
+if n>0:
+    print("+ve number")
+elif n<0:
+    print("-ve number")
+else:
+    print("Zero number")
+
+    
+
+
+
+
+
+
+def biggestNum(a,b,c):
+    if a>b and a>c :
+        print(a , " is big")
+    elif b>c :
+        print(b , " is big")
+    else:
+        print(c , " is big")
+    return
+
+a,b,c = input("Enter 3 numbers : ").split()
+biggestNum(int(a), int(b), int(c))
+
+
+
+
+
+
+
+
+
+
+Nested - if :
+
+if True:
+    print("outer if block")
+    if True:
+        print("Inner if block")
+
+
+
+
+
+
+
+if True:
+    print("outer if block")
+    if False:
+        print("Inner if block")
+
+
+
+
+
+
+if True:
+    print("outer if block")
+    if False:
+        print("Inner if block")
+    else :
+        print("Inner else block")
+
+
+
+
+
+
+
+if False:
+    print("outer if block")
+    if True:
+        print("Inner if block")
+else :
+    print("Outer else block")
+
+
+
+
+
+
+
+
+def biggestNum(a,b,c):
+    if a>b :
+        if a>c:
+            print("a is big")
+        else:
+            print("c is big")
+    else:
+        if b>c:
+            print("b is big")
+        else:
+            print("c is big")
+    return
+
+a,b,c = input("Enter 3 numbers : ").split()
+biggestNum(int(a) , int(b) , int(c))
+
+
+
+
+
+
+
+
+
+i=1
+while(i<=10):
+    print("i val : ",i)
+    i=i+1 # i+=1
+
+
+
+
+
+
+i=1
+while(i<=10):
+    if i%2==0:
+        print("i val : ",i)
+    i=i+1 # i+=1
+
+
+
+
+
+
+
+
+for i in range(10):
+    print("i value : ",i)
+
+
+
+for i in range(5,11):
+    print("i value : ",i)
+
+
+
+for i in range(0,11,2):
+    print("i value : ",i)
+
+
+
+
+for i in range(10,0,-1):
+    print("i value : ",i)
+
+
+
+
+Sum of First n number program:
+def sumOfN(limit):
+    sum=0
+    for x in range(1,limit+1):
+        sum += x
+    return sum
+
+n = int(input("Enter limit : "))
+sum = sumOfN(n)
+print("Sum of first ", n , " numbers is : ", sum)
+
+
+
+
+
+Perfect Number program:
+def isPerfect(num):
+    sum=0
+    for x in range(1,num):
+        if num%x==0:
+            sum += x
+
+    if num==sum:
+        return True
+    else:
+        return False
+
+n = int(input("Enter a number : "))
+perfect = isPerfect(n)
+if perfect:
+    print(n, ' is Perfect')
+else:
+    print(n, ' is not perfect')
+
+
+
+
+
+
+
+
+ASCII set :
+def ASCII(limit):
+    for i in range(limit+1):
+        print(i," : ",chr(i))
+    return
+
+ASCII(256)
+
+
+
+
+
+
+
+def ASCII(limit):
+    for i in range(limit+1):
+        print(str(i)+" : "+chr(i),end='\t')
+    return
+
+ASCII(256)
+
+
+
+
+
+
+def printTable(n):
+    for i in range(1,11):
+        print(n," * ",i," = ",n*i)
+    return
+
+printTable(int(input("Table no : ")))
+
+
+
+
+
+
+
+break:
+
+for i in range(1,11):
+    if i==5:
+        break
+    print("i value : ", i)
+
+
+
+
+continue :
+
+for i in range(1,11):
+    if i==5:
+        continue
+    print("i value : ", i)
+
+
+
+pass : Used to leave a block or method as empty.
+
+We cannot leave the block as empty instead we use pass keyword.
+
+
+for i in range(1,10):
+print("i value : ", i) ----> Error :
+
+
+
+
+for i in range(1,10):
+    pass
+print("i value : ", i)
+
+Above for-loop execute with empty body and prints last number in the loop
+
+
+
+
+Nested loop:
+
+
+
+count=0
+for x in range(1,6):
+    for y in range(1,6):
+        count=count+1
+
+print("count : ",count)
+
+
+
+
+
+
+for x in range(1,6):
+    for y in range(1,6):
+        print("*", end=' ')
+    print()
+
+
+
+
+

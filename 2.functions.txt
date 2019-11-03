@@ -1,0 +1,454 @@
+Local and Global variables in Python
+
+•	Declaration of variable inside a function or block is referred as local variable.
+•	In Python when you want to use variable withi complete program or module you must declare it as global variable.
+•	If you want to use the variable in a specific function or method you use local variable.
+
+
+
+
+Interpreter raise the error and termintes the program only when error occurs:
+def m1():
+    a=10
+    print(a)
+    return
+
+def m2():
+    print(a)
+    return
+
+m1()
+m2()
+
+
+Output : print 10 and then raise error
+
+
+
+
+
+Global variable:
+a=10
+def m1():
+    print(a)
+    return
+
+def m2():
+    print(a)
+    return
+
+m1()
+m2()
+
+
+
+
+
+Code program: Local priority when we access any variable inside the block or method
+
+msg = 'i am global'
+def m1():
+    msg = 'i am local'
+    print(msg)
+    return
+
+m1()
+print(msg)
+
+
+
+
+
+Changing global variable value :
+	global keyword is used to create a global variable and make changes to the variable in a local context.
+	Use of global keyword outside a function has no effect.
+
+
+c = 1 # global variable
+    
+def add():
+    c = c + 2 # increment c by 2
+    print(c)
+
+add()
+
+
+
+msg = 'i am global'
+def m1():
+    global msg
+    msg = 'modify global'
+
+    print(msg) # access global variable
+    return
+
+m1()
+print(msg)
+
+
+
+
+
+using global variable, directly we can create global variables:
+def m1():
+    global x
+    x=25
+    return
+
+m1()
+print("x value : ", x)
+
+
+
+
+
+Global variable access in nested functions:
+def m1():
+    def m2():
+        print("m2")
+        return
+
+    print("m1")
+    return
+
+m1()
+
+
+
+
+
+def m1():
+    def m2():
+        print("m2")
+        return
+
+    print("m1")
+    m2()
+    return
+
+m1()
+
+
+
+
+We cannot access a function before its definition in the application
+def m1():
+    test() # error : access before definition
+    
+    def test():
+        print("m1 test")
+        return
+
+    return
+
+m1()
+
+
+
+
+
+Advantage is avoid collisions:
+def m1():
+    def test():
+        print("m1 test")
+        return
+
+    test()
+    return
+
+def m2():
+    def test():
+        print("m2 test")
+        return
+
+    test()
+    return
+
+m1()
+m2()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+global variable access in nested functions:
+
+Important code:
+def m1():
+    x = 20
+
+    def m2():
+        global x
+        x = 25
+        return
+    
+    print("x value : ", x)
+    print("Calling m2....")
+    m2()
+    print("x value : ", x)
+    return
+
+m1()
+print("x value : ", x)
+
+
+
+
+
+
+
+x = 30
+def m1():
+    global x
+    x = 10
+    print("x value : ", x)
+    
+    def m2():
+        global x
+        x = 25
+        return
+    
+    print("x value : ", x)
+    print("Calling m2....")
+    m2()
+    print("x value : ", x)
+    return
+
+m1()
+print("x value : ", x)
+
+
+
+
+
+
+
+
+
+Function arguments in Python
+•	In Python, user-defined functions can take four different types of arguments. 
+•	The argument types and their meanings are pre-defined and can’t be changed. 
+•	A developer follow these pre-defined rules to make their own custom functions. 
+
+The following are the four types of arguments and their rules.
+
+1. Default arguments:
+•	Python has a different way of representing syntax and default values for function arguments. 
+•	Default values indicate that the function argument will take that value if no argument value is passed during function call. 
+•	The default value is assigned by using assignment (=) operator. Below is a typical syntax for default argument. Here, msg parameter has a default value Hello!.
+
+Function definition
+	def defaultArg( name, msg = "Hello!"):
+
+Function call
+	defaultArg( name)
+
+
+--> A Non-default argument cannot be followed by Default argument:
+	def check(a=30 , b=20, c):
+   		print(a,b,c);
+   		return
+
+	check(10)
+
+
+
+
+We can override the default arguments of the function if required:
+def defaultArgs(a,b,c=30):
+    print("Sum : ",a+b+c)
+    return
+
+defaultArgs(10,20)
+defaultArgs(20,30,40)#override c value
+defaultArgs(10,20,30,40)#error
+
+
+
+
+
+Parameter names(local variables) should not match with global variable: 
+a=30
+def defaultArgs(a, b=10):
+    global a
+    print(a,b)
+    return
+
+defaultArgs(10,20)
+
+
+
+
+
+
+
+
+
+
+
+
+Required arguments:
+•	Required arguments are the mandatory arguments of a function. 
+•	These argument values must be passed in correct number and order during function call. 
+•	Below is a typical syntax for a required argument function.
+
+Function definition
+def requiredArg (str,num):
+
+Function call
+requiredArg ("Hello",12)
+
+
+
+Code program:
+
+def check1(a, b):
+   print(a,b);
+   return
+
+def check2(a, b, c):
+   print(a,b,c);
+   return
+
+check1(10,20)
+check2(10,20,30)
+
+
+
+
+
+global keyword cannot be used when function parameter and global variable having the same name.
+
+code program:
+
+a=10
+def check1(a):
+    print(a) # prints 20
+    return
+
+check1(20)
+
+
+
+
+code program:
+
+a=10
+def check1(a):
+    global a # error
+    print(a)
+    return
+
+check1(20)
+
+
+
+
+
+
+
+3. Keyword arguments:
+•	Keyword arguments are relevant for Python function calls. 
+•	The keywords are mentioned during the function call along with their corresponding values. 
+•	These keywords are mapped with the function arguments so the function can easily identify the corresponding values even if the order is not maintained during the function call. 
+•	The following is the syntax for keyword arguments.
+
+Function definition
+def keywordArg( name, role ):
+
+Function call
+keywordArg( name = "Tom", role = "Manager")
+or
+keywordArg( role = "Manager", name = "Tom")
+
+
+
+
+def keyArgs(name, age):
+    print("Name : ", name)
+    print("Age : ", age)
+    return
+
+keyArgs(age=10, name=20)
+
+
+
+
+
+
+
+
+
+
+
+4. Variable number of arguments:
+•	This is very useful when we do not know the exact number of arguments that will be passed to a function. Or we can have a design where any number of arguments can be passed based on the requirement. 
+•	Below is the syntax for this type of function call.
+
+Function definition
+def varlengthArgs(*varargs):
+
+Function call
+varlengthArgs(30,40,50,60)
+
+
+
+
+
+
+def varArgs(*args):
+    print(args)
+    return
+
+Args(10,20,30,40,50)
+
+
+
+
+
+
+
+
+def varArgs(*args):
+    print(args[0])
+    return
+
+varArgs(10,20,30,40,50)
+
+
+
+
+
+
+
+
+
+
+
+
+def varArgs(*args):
+    for ele in args:
+        print(ele)
+    return
+
+varArgs(10,20,30,40,50)
+
+
+
+
+
+
+
